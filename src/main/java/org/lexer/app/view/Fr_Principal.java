@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.lexer.app.tools.LexerMap;
+
 import javax.swing.JMenuBar;
 import java.awt.BorderLayout;
 import javax.swing.JMenu;
@@ -30,6 +33,7 @@ import javax.swing.JScrollPane;
 public class Fr_Principal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private LexerMap lexer = new LexerMap();
 	private JPanel contentPane;
 	private JMenuBar menuBar;
 	private JMenu menuArchivo;
@@ -110,7 +114,7 @@ public class Fr_Principal extends JFrame {
 		opcionAnalizar = new JMenuItem("Analizar");
 		opcionAnalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fillList();
+				lexer.fillList(txaDataString.getText());
 			}
 		});
 		menuActions.add(opcionAnalizar);
@@ -159,20 +163,6 @@ public class Fr_Principal extends JFrame {
 		this.txaDataString.setEditable(false);
 		this.txaDataString.setBackground(new Color(109,109,109));
 	}
-	
-	private void fillList() {
-		String text = this.txaDataString.getText();		
-		characters = new LinkedList<Character>();
-		
-		for(int i = 0; i < text.length(); i++) {
-			char cr = text.charAt(i);
-			if(cr != '\n' || cr != ' '|| cr != '\t' || cr != '\r') {
-				this.characters.add(text.charAt(i));
-			}	
-		}		
-		
-		characters.stream().forEach(c -> {System.out.println(c);});
-	}	
 	
 	/**
 	 * Using a JFile Choser to select a text file on a especific path of the pc, readit and print the content
