@@ -48,21 +48,7 @@ public class Fr_Principal extends JFrame {
 	private JMenu menuActions;
 	private JMenuItem opcionAnalizar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Fr_Principal frame = new Fr_Principal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -114,7 +100,7 @@ public class Fr_Principal extends JFrame {
 		opcionAnalizar = new JMenuItem("Analizar");
 		opcionAnalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lexer.fillList(txaDataString.getText());
+				analizer();
 			}
 		});
 		menuActions.add(opcionAnalizar);
@@ -209,6 +195,11 @@ public class Fr_Principal extends JFrame {
 		}
 		
 		
+	}
+	
+	private void analizer() {
+		lexer.fillList(txaDataString.getText().replaceAll("\\s", ""));		
+		this.txaDataString.append(lexer.start());
 	}
 
 }
